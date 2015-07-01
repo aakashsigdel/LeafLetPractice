@@ -1,9 +1,6 @@
-var aakash = 1;
-
 console.log("hello");
 
 function aakash() {
-	var aakash;
 	console.log("Aakash");
 }
 
@@ -17,7 +14,7 @@ function lolo() {
 }
 
 function kkash() {
-	console.log("hello there" + aak )
+	console.log("hello there");
 }
 
 

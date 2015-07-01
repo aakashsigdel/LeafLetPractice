@@ -1,0 +1,67 @@
+<html>
+<head>
+	<title>LeafLet praactice2</title>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+	<style type="text/css">
+		#map {
+			height: 180px;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+</body>
+
+<script type="text/javascript">
+var map = L.map('map').setView([40, -100], 10);
+
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		attribution: 'Aakash &copy;[...]',
+		maxZoom: 18,
+		id: 'mapbox.streets',
+		accessToken: 'pk.eyJ1IjoiYWFrYXNoc2lnZGVsIiwiYSI6ImJjMzQ0M2U0ODg2MmQzNTNiNTc5NjlhYjhkZmYzMmNiIn0.cWIfdnXG_BI_XNm0J2I1Ng'
+		}).addTo(map);
+
+var states = [{
+	"type": "Feature",
+	"properties": {"party": "Republican"},
+	"geometry": {
+		"type": "Polygon",
+		"coordinates": [[
+			[-104.05, 48.99],
+			[-97.22,  48.98],
+			[-96.58,  45.94],
+			[-104.03, 45.94],
+			[-104.05, 48.99]
+		]]
+	}
+}, {
+	"type": "Feature",
+	"properties": {"party": "Democrate"},
+	"geometry": {
+		"type": "Polygon",
+		"coordinates": [[
+			[-109.05, 41.00],
+		        [-102.06, 40.99],
+		        [-102.03, 36.99],
+			[-109.04, 36.99],
+			[-109.05, 41.00]
+		]]
+	}
+}];
+
+L.geoJson(states, {
+	style: function(feature) {
+		switch(feature.properties.party) {
+			case 'Republican': return {color: "#ff0000"};
+			case 'Democrate': return {color: "#0000ff"};
+		}
+	}
+}).addTo(map);
+
+
+</script>
+
+
+</html>
