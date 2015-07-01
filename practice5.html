@@ -1,0 +1,53 @@
+<html>
+<head>
+	<title>LeafLetPractice</title>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+	<style type="text/css">
+		#map {
+			height: 180px;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+</body>
+<script type="text/javascript">
+var map = L.map('map').setView([39, -104], 5);
+
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		attribution: 'Aakash &copy; [...]',
+		maxZoom: 18,
+		id: 'mapbox.streets',
+		accessToken: 'pk.eyJ1IjoiYWFrYXNoc2lnZGVsIiwiYSI6ImJjMzQ0M2U0ODg2MmQzNTNiNTc5NjlhYjhkZmYzMmNiIn0.cWIfdnXG_BI_XNm0J2I1Ng'
+		}).addTo(map);
+
+omeFeatures = [{
+    "type": "Feature",
+    "properties": {
+            "name": "Coors Field",
+            "show_on_map": true
+        },
+    "geometry": {
+            "type": "Point",
+            "coordinates": [-104.99404, 39.75621]
+        }
+}, {
+    "type": "Feature",
+    "properties": {
+            "name": "Busch Field",
+            "show_on_map": false
+        },
+    "geometry": {
+            "type": "Point",
+            "coordinates": [-104.98404, 39.74621]
+        }
+}];
+
+L.geoJson(omeFeatures, {
+	filter: function(feature, layer) {
+		return feature.properties.show_on_map;
+	}
+}).addTo(map);
+</script>
+</html>

@@ -1,0 +1,56 @@
+<html>
+<head>
+	<title>LeafLetPractice</title>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+	<style type="text/css">
+		#map {
+			height: 180px;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+</body>
+<script type="text/javascript">
+var map = L.map('map').setView([95, -104], 10);
+
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		attribution: 'Aakash &copy; [...]',
+		maxZoom: 18,
+		id: 'mapbox.streets',
+		accessToken: 'pk.eyJ1IjoiYWFrYXNoc2lnZGVsIiwiYSI6ImJjMzQ0M2U0ODg2MmQzNTNiNTc5NjlhYjhkZmYzMmNiIn0.cWIfdnXG_BI_XNm0J2I1Ng'
+		}).addTo(map);
+
+var geoJsonFeatureColl = [{
+	"type": "Feature",
+	"properties": {
+		"name": "myPoint1",
+		"popupContent": "I am the point one"
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [100, 50]
+	} 
+}, {
+	"type": "Feature",
+	"properties" : {
+		"name": "myPoint2",
+		"popupContent": "I am th point2"
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [-105.3463, 93.4323]
+	}
+}];
+
+function onEachFeature(feature, layer) {
+	if(feature.properties && feature.properties.popupContent)
+		layer.bindPopup(feature.properties.popupContent);
+}
+
+L.geoJson(geoJsonFeatureColl, {
+	onEachFeature: onEachFeature
+}).addTo(map);
+</script>
+</html>
